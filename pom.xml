@@ -77,8 +77,8 @@
                                 <snapshotRepoKey>libs-snapshot-local</snapshotRepoKey>
                             </publisher>
                             <buildInfo>
-                                <buildName>plugin-demo</buildName>
-                                <buildNumber>1</buildNumber>
+                                <buildName>${env.BUILD_NAME}</buildName>
+                                <buildNumber>${env.BUILD_ID}</buildNumber>
                                 <buildUrl>http://build-url.org</buildUrl>
                             </buildInfo>
                             <licenses>
