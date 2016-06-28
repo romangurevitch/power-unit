@@ -77,7 +77,7 @@
                                 <snapshotRepoKey>libs-snapshot-local</snapshotRepoKey>
                             </publisher>
                             <buildInfo>
-                                <buildName>${env.BUILD_NAME}</buildName>
+                                <buildName>${env.JOB_NAME}</buildName>
                                 <buildNumber>${env.BUILD_ID}</buildNumber>
                                 <buildUrl>http://build-url.org</buildUrl>
                             </buildInfo>
