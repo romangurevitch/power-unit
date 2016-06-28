@@ -40,14 +40,14 @@ node('node1') {
     stage 'Clone'
      git url: 'https://github.com/TamirHadad/maven-demo.git'
      stage 'Set mvnHome'
-     def mvnHome = tool 'M3'
-     env.PATH = "${mvnHome}/bin:${env.PATH}"
-     stage 'clean insatll'
-     sh "mvn clean install -Dmaven.test.skip=true"
-     stage 'test'
-     sh "mvn test"
-     stage 'deploy'
-     sh "mvn deploy"
+     withEnv(["PATH+MAVEN=${tool 'M3'}/bin"]) {
+         stage 'clean install'
+         sh "mvn clean install -Dmaven.test.skip=true"
+         stage 'test'
+         sh "mvn test"
+         stage 'deploy'
+         sh "mvn deploy"
+    }
 }
 ```
 ## Sending parameters to the pom file
