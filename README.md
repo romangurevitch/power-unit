@@ -32,6 +32,24 @@ This would deploy the produced artifacts to the configured Artifactory server:
  [INFO] Build successfully deployed. Browse it in Artifactory under http://localhost:8081/artifactory/webapp/builds/plugin-demo/1
 ```
 
+
+### Pipeline script
+
+```
+node('node1') {
+    stage 'Clone'
+     git url: 'https://github.com/TamirHadad/maven-demo.git'
+     stage 'Set mvnHome'
+     def mvnHome = tool 'M3'
+     env.PATH = "${mvnHome}/bin:${env.PATH}"
+     stage 'clean insatll'
+     sh "mvn clean install -Dmaven.test.skip=true"
+     stage 'test'
+     sh "mvn test"
+     stage 'deploy'
+     sh "mvn deploy"
+}
+```
 ## Sending parameters to the pom file
 
 You can send parameters as system properties, and then use them inside the pom file, the same way the *username* and *password*
