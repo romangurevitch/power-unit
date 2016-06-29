@@ -36,9 +36,9 @@ This would deploy the produced artifacts to the configured Artifactory server:
 ### Pipeline script
 
 ```
-node('node1') {
+node {
     stage 'Clone'
-     git url: 'https://github.com/TamirHadad/maven-demo.git'
+     git url: 'https://github.com/TamirHadad/power-unit.git'
      stage 'Set mvnHome'
      withEnv(["PATH+MAVEN=${tool 'M3'}/bin"]) {
          stage 'clean install'
@@ -46,7 +46,7 @@ node('node1') {
          stage 'test'
          sh "mvn test"
          stage 'deploy'
-         sh "mvn deploy"
+         sh "mvn deploy -Dmaven.test.skip=true"
     }
 }
 ```
