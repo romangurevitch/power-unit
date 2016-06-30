@@ -1,0 +1,17 @@
+node {
+    stage 'Clone'
+    git url: 'https://github.com/TamirHadad/power-unit.git'
+
+    stage 'Set mvnHome'
+    withEnv(["PATH+MAVEN=${tool 'M3'}/bin"]) {
+        stage 'clean install'
+        sh "mvn clean install -Dmaven.test.skip=true"
+
+        stage 'test'
+        sh "mvn test"
+
+        stage 'deploy'
+        sh "mvn deploy -Dmaven.test.skip=true"
+    }
+    env.BUILD_PROPS = "build.name=${env.JOB_NAME};build.number=${env.BUILD_ID}"
+}
